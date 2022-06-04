@@ -9,7 +9,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-/*! cash-dom 1.3.5, https://github.com/kenwheeler/cash @license MIT */
+
 (function (factory) {
     window.cash = factory();
 })(function () {
@@ -22,7 +22,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var noop = function () { },
         isFunction = function (item) {
-            // @see https://crbug.com/568448
+          
             return typeof item === typeof noop && item.call;
         },
         isString = function (item) {
