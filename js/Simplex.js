@@ -20,13 +20,12 @@ Simplex.assertDataIsCorrect = function (data) {
 Simplex.simplex = function (data) {
     Simplex.assertDataIsCorrect(data);
 
-    // Keep steps for SimplexResult
+    
     data.steps = Array();
-    data.steps.push(SimplexTable.getSimplexTable()); // Get a copy of the table
+    data.steps.push(SimplexTable.getSimplexTable()); 
 
     data = Simplex.normalize(data);
 
-    // First solution
     data.steps.push({matrix: SimplexUtil.cloneMatrix(data.matrix)});
 
     data.iter = 0;
@@ -56,8 +55,8 @@ Simplex.normalize = function (data) {
     data.slack = Array();
     data.surplus = Array();
 
-    // For each <= constraint we add a   slack variable
-    // For each >= constraint we add a surplus variable
+    // para cada <= constraint é adicionado a variavel de folga
+    // para cada  >= constraint é 
     for (let i = 0; i < data.numberOfConstraints; i++) {
         if (data.operators[i] === '<=') {
             // Adiciona a variavel de folga 
@@ -74,7 +73,7 @@ Simplex.normalize = function (data) {
 
     data.matrix = Array(data.constraints.length + columnsToAdd.length);
 
-    // Append columns
+
 
     for (let i = 0; i < data.matrix.length - columnsToAdd.length; i++) {
         data.matrix[i] = data.constraints[i].slice();
@@ -88,20 +87,20 @@ Simplex.normalize = function (data) {
 
     data.matrix = SimplexUtil.transpose(data.matrix);
 
-    // Not sure why but the length of the matrix doesn't match up anymore
+
     data.matrix.length = data.constraints.length;
 
-    // Add b column
+
     data.columns.push('b');
     for (let i = 0; i < data.matrix.length; i++) {
         data.matrix[i].push(data.b[i]);
     }
 
-    // Add the objective function
+
     data.matrix.unshift(data.objectiveFunction.slice());
 
-    // Transform objective function as LHS = 0
-    // This is the same as multiplying everything to -1
+
+
     for (let i = 0; i < data.matrix[0].length; i++) {
         data.matrix[0][i] *= -1;
     }
@@ -110,7 +109,7 @@ Simplex.normalize = function (data) {
         data.matrix[0].push(0);
     }
 
-    // Add Z column
+    // Adiciona a coluna Z
     data.columns.unshift('Z');
     for (let i = 0; i < data.matrix.length; i++) {
         data.matrix[i].unshift(0);
